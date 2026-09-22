@@ -6,22 +6,22 @@ import { Slide, Inner, Half, Title, Subtitle, colors, fonts, border, shadow, sha
  *
  * 演讲者备注：
  * Deterministic Evaluations。这个方式就是用代码执行来评测 AI 完成的任务结果是对的，以及用的是正确的过程完成任务。
- * 任务结果就是看，Email 发给老板了么？你可以编一段代码来连接你的邮箱查看今天有没有发送给老板的 Email。
- * 查看 AI 完成任务的过程也非常重要。AI 可以是发出去 Email，但我们还不知道它是用了数据库的资料写的，还是瞎猛出来的。
- * 我们也想保证 human in the loop，保证没有收到用户人的确定是不允许发 Email 的。这都是通过查看 AI 完成任务的过程中
- * 有没有用过工具。怎么查呢？就是看那个记录。messages 里会有工具使用的记录，代码就能查得到。
+ * 任务结果就是看，客户资料存进数据库了么？你可以编一段代码查数据库的 customers 表，看有没有这位客户的名字和电话。
+ * 查看 AI 完成任务的过程也非常重要。AI 可以是把 internet plan 介绍给客户了，但我们还不知道它是用 get_internet_plans 从数据库查的，
+ * 还是瞎猛出来的。我们也想保证 human in the loop，保证客户没确认 internet plan、没给电话之前，是不允许 save_customer_details 的。
+ * 这都是通过查看 AI 完成任务的过程中有没有用过工具、什么时候用的。怎么查呢？就是看那个记录。messages 里会有工具使用的记录，代码就能查得到。
  */
 const CHECKS = [
 	{
 		label: 'Check: functional correctness',
 		zh: '任务结果对不对',
-		detail: 'Email 发给老板了么？写一段代码连接邮箱，查今天有没有发给老板的 Email。',
+		detail: '客户资料存进数据库了么？写一段代码查 customers 表，看有没有这位客户的名字和电话。',
 		color: colors.green,
 	},
 	{
 		label: 'Check: correct tool use',
 		zh: '过程对不对',
-		detail: '是用数据库的资料写的，还是瞎编的？有没有等用户确定再发（human in the loop）？',
+		detail: 'internet plan 是用 get_internet_plans 从数据库查的，还是瞎编的？有没有等客户确认再 save_customer_details？',
 		color: colors.blue,
 	},
 ];

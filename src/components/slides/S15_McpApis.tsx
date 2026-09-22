@@ -6,7 +6,7 @@ import { CodeBlock } from '../CodeBlock';
  * MCP · 两步走：发现（get tools）再执行（call tool）
  *
  * 演讲者备注：
- * 用 MCP 永远是两步。第一步"发现"（Discovery）：Agent 启动、循环还没开始的时候，MCP Client 先问 Server 一句
+ * 用 MCP 永远是两步。第一步"发现"（Discovery）：Agent 启动、循环还没开始的时候，MCP Client 先问 Database MCP Server 一句
  * get tools（协议里叫 tools/list）：你有哪些工具、每个叫什么、要什么参数？Server 回一张清单，我们把清单放进 messages，
  * 模型才知道有什么工具可以要。这一步只做一次。第二步"执行"（Execution）：进了 while True 循环，模型每次要求工具使用，
  * Client 就发一句 call tool（tools/call），把工具名和参数交给 Server，Server 跑完把结果回来，我们 append 到 messages。
@@ -20,12 +20,15 @@ const LIST_RESPONSE = `
 {
   "tools": [
     {
-      "name": "get_financial_data",
-      "description": "当天的财务资料",
-      "inputSchema": { "date": "string" }
+      "name": "get_internet_plans",
+      "description": "Internet plans available at an address",
+      "inputSchema": { "address": "string" }
     },
-    { "name": "get_kanban_tasks", ... },
-    { "name": "send_email", ... }
+    {
+      "name": "save_customer_details",
+      "description": "Save the details of an interested customer",
+      "inputSchema": { "name": "string", "phone": "string" }
+    }
   ]
 }
 `;
@@ -34,8 +37,8 @@ const CALL_REQUEST = `
 {
   "method": "tools/call",
   "params": {
-    "name": "get_financial_data",
-    "arguments": { "date": "24-09-2026" }
+    "name": "get_internet_plans",
+    "arguments": { "address": "12 Example St, Clayton VIC 3168" }
   }
 }
 `;
@@ -43,7 +46,7 @@ const CALL_REQUEST = `
 const CALL_RESPONSE = `
 {
   "content": [
-    { "type": "text", "text": "revenue 12400, expenses 8150, net_profit 4250" }
+    { "type": "text", "text": "NBN 50 $69/month, NBN 100 $85/month, NBN 250 $99/month" }
   ]
 }
 `;

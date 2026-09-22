@@ -3,14 +3,14 @@ import { motion } from 'framer-motion';
 import { Slide, Inner, Title, Subtitle, colors, fonts, border, shadow, shadowSm } from '../ui';
 
 /**
- * MCP · 工具住在自己的服务器里
+ * MCP · 工具住在自己的服务器里（Database MCP Server）
  *
  * 演讲者备注：
- * 很多人第一反应是：MCP 不就是把 function 换个名字吗？关键区别在这里：前面我们的三个工具是写在 Agent 自己的代码里的，
- * 跟 while True 循环跑在同一个进程。MCP 里，工具搬出去了，住在一个独立的 MCP Server 里，可以是本机另一个进程，
+ * 很多人第一反应是：MCP 不就是把 function 换个名字吗？关键区别在这里：前面我们的两个工具是写在 Agent 自己的代码里的，
+ * 跟 while True 循环跑在同一个进程。MCP 里，工具搬出去了，住在一个独立的 Database MCP Server 里，可以是本机另一个进程，
  * 也可以是另一台机器上的服务。Agent 这边只剩一个 MCP Client，通过网络跟 Server 说话。
- * 好处：工具单独部署、单独更新，不用碰 Agent；多个 Agent 可以共用同一个 Server；数据库的密钥、权限留在 Server 那边，
- * Agent 根本碰不到。下一页我们看 Client 和 Server 之间到底说些什么。
+ * 好处：数据库的工具单独部署、单独更新，不用碰 Agent；客服 Agent、销售的 Agent 可以共用同一个 Database MCP Server；
+ * 数据库的密钥、读写权限留在 Server 那边，Agent 根本碰不到。下一页我们看 Client 和 Server 之间到底说些什么。
  */
 const AGENT_PARTS = [
 	{ label: 'LLM 调用', sub: 'llm(messages)', color: colors.purple, textColor: colors.white },
@@ -19,15 +19,14 @@ const AGENT_PARTS = [
 ];
 
 const TOOLS = [
-	{ name: 'get_financial_data', sub: '→ 数据库' },
-	{ name: 'get_kanban_tasks', sub: '→ 任务版 API' },
-	{ name: 'send_email', sub: '→ 邮箱 API' },
+	{ name: 'get_internet_plans', sub: '→ 查 internet_plans 表' },
+	{ name: 'save_customer_details', sub: '→ 写 customers 表' },
 ];
 
 const BENEFITS = [
 	{ k: '独立部署', v: '工具单独更新、单独重启，不用碰 Agent 的代码', color: colors.blue },
-	{ k: '一起共用', v: '多个 Agent 接同一个 MCP Server，工具只写一次', color: colors.green },
-	{ k: '权限隔离', v: '数据库密钥、API 权限留在 Server，Agent 碰不到', color: colors.orange },
+	{ k: '一起共用', v: '客服 Agent、销售的 Agent 接同一个 Database MCP Server，工具只写一次', color: colors.green },
+	{ k: '权限隔离', v: '数据库密钥、读写权限留在 Server，Agent 碰不到', color: colors.orange },
 ];
 
 function Box({ title, tag, color, children }: { title: string; tag: string; color: string; children: ReactNode }) {
@@ -57,7 +56,7 @@ export default function S14_McpServer() {
 						}}>05 · MCP</span>
 						<Title size="44px">工具住在自己的服务器里，<span style={{ background: colors.red, color: colors.white, padding: '0 14px' }}>不在 Agent 里</span></Title>
 					</div>
-					<Subtitle>MCP Server 是一个独立的进程，可以在本机，也可以在另一台机器上。Agent 这边只剩一个 MCP Client。</Subtitle>
+					<Subtitle>Database MCP Server 是一个独立的进程，可以在本机，也可以在另一台机器上。Agent 这边只剩一个 MCP Client。</Subtitle>
 				</motion.div>
 
 				<div style={{ display: 'flex', alignItems: 'stretch', gap: 0 }}>
@@ -100,7 +99,7 @@ export default function S14_McpServer() {
 					</motion.div>
 
 					<motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.2 }} style={{ flex: 1, display: 'flex' }}>
-						<Box title="MCP Server" tag="进程 B · 独立部署" color={colors.green}>
+						<Box title="Database MCP Server" tag="进程 B · 接数据库" color={colors.green}>
 							{TOOLS.map((t, i) => (
 								<motion.div
 									key={t.name}
@@ -111,7 +110,7 @@ export default function S14_McpServer() {
 										display: 'flex', alignItems: 'center', justifyContent: 'space-between',
 										padding: '12px 16px', background: colors.dark, color: colors.white, border, boxShadow: shadowSm,
 									}}>
-									<span style={{ fontFamily: fonts.mono, fontSize: 18, fontWeight: 700, color: colors.blue }}>{t.name}()</span>
+									<span style={{ fontFamily: fonts.mono, fontSize: 17, fontWeight: 700, color: colors.blue }}>{t.name}()</span>
 									<span style={{ fontSize: 15, fontWeight: 600, opacity: 0.85 }}>{t.sub}</span>
 								</motion.div>
 							))}

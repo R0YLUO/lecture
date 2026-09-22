@@ -3,23 +3,24 @@ import { Slide, Inner, Title, colors, fonts, border, shadowSm } from '../ui';
 import { CodeBlock } from '../CodeBlock';
 
 /**
- * 循环最后一轮 · 没有工具要求，直接回答
+ * 循环最后一轮 · 目的达到，没有工具要求，直接回答
  *
  * 演讲者备注（承接前页）：
- * 当目的达到时，或者收到足够资料回答用户人的问题时，就不会有工具使用的要求了。
- * 要是这次循环没有工具使用的要求的话，就可停止循环，把模型输出的数据回给用户人。
+ * 客户资料存好了，模型的目的达到了：不再要求工具，直接告诉客户"销售会打电话给你"。
+ * 代码走到 else 分支，停止循环，把这句回给客户，对话结束。销售代表那边，在数据库里看到这位新客户，
+ * 打电话跟进、成交——重复的问题一句都没答，时间全花在真正的销售上。
  */
 const RESPONSE = `
 {
   "tool_call": null,
-  "text": "I have successfully sent today's email."
+  "text": "Thanks Wei! I've saved your details. One of our sales reps will call you on 0412 345 678 to get NBN 100 connected."
 }
 `;
 
 const STEPS = [
-	{ k: '模型', v: 'tool_call 为 null：目的达到，不再要求工具', color: colors.blue },
-	{ k: '代码', v: '走到 else 分支 → return response.text，循环结束', color: colors.green },
-	{ k: '你', v: '收到 "今天的 Email 已经发出去了"，回家吃饭', color: colors.yellow },
+	{ k: '模型', v: 'tool_call 为 null：资料存好了，目的达到，不再要求工具', color: colors.blue },
+	{ k: '代码', v: '走到 else 分支 → return response.text，这句发给客户，对话结束', color: colors.green },
+	{ k: '销售', v: '在数据库里看到新客户 → 打电话跟进、成交，重复的问题一句没答', color: colors.yellow },
 ];
 
 export default function S09_FinalResponse() {
@@ -32,11 +33,11 @@ export default function S09_FinalResponse() {
 						padding: '6px 14px', background: colors.black, color: colors.yellow,
 						fontFamily: fonts.mono, fontSize: 14, fontWeight: 700, letterSpacing: 2,
 					}}>FINAL</span>
-					<Title size="44px">没有工具要求：<span style={{ background: colors.green, padding: '0 14px' }}>停止循环，直接回答</span></Title>
+					<Title size="44px">目的达到：<span style={{ background: colors.green, padding: '0 14px' }}>停止循环，告诉客户销售会联系</span></Title>
 				</motion.div>
 
 				<motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.2 }}>
-					<CodeBlock code={RESPONSE} lang="json" title="response.json" fontSize={22} delay={0.4} />
+					<CodeBlock code={RESPONSE} lang="json" title="response.json" fontSize={21} delay={0.4} />
 				</motion.div>
 
 				<div style={{ display: 'flex', gap: 20 }}>

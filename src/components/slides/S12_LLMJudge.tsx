@@ -5,16 +5,16 @@ import { Slide, Inner, Half, Title, Subtitle, colors, fonts, border, shadow, sha
  * Non-deterministic evals · LLM as a judge
  *
  * 演讲者备注：
- * 用 LLM as a judge 可以评测 agent 写出来的 Email 结构和资料正确，也可以看用的语法专业。
- * 你可以把写的 Email，加上当天的数据库资料、任务版资料，和一个评分体系，全部发给模型做评测。
- * 这样能评测代码评测不了的一些细节。
+ * 用 LLM as a judge 可以评测 agent 跟客户说的话：介绍的 internet plan 和价格跟数据库一致不一致，有没有答到客户问的问题，
+ * 语气对客户礼貌不礼貌、专业不专业。你可以把整段对话记录，加上数据库里这个地址的 internet plan 资料、存进去的客户资料，
+ * 和一个评分体系，全部发给模型做评测。这样能评测代码评测不了的一些细节。
  */
 const CHECKS = [
-	{ label: 'Check: tone', zh: '语气 · 语法专业不专业', color: colors.purple },
-	{ label: 'Check: correct structure and email detail', zh: 'Email 的结构和资料对不对', color: colors.orange },
+	{ label: 'Check: tone', zh: '语气 · 对客户礼貌不礼貌、专业不专业', color: colors.purple },
+	{ label: 'Check: correct plan details', zh: '介绍的 internet plan、价格跟数据库一致不一致，答到客户问的没有', color: colors.orange },
 ];
 
-const INPUTS = ['写好的 Email', '当天的数据库资料', '任务版资料', '一个评分体系'];
+const INPUTS = ['整段对话记录', '数据库里这个地址的 internet plan', '存进去的客户资料', '一个评分体系'];
 
 export default function S12_LLMJudge() {
 	return (
@@ -78,7 +78,7 @@ export default function S12_LLMJudge() {
 							<span style={{ fontSize: 36, lineHeight: 1 }}>⚖️</span>
 							<div style={{ color: colors.white }}>
 								<div style={{ fontFamily: fonts.heading, fontSize: 26, fontWeight: 900, lineHeight: 1.1 }}>LLM as a Judge</div>
-								<div style={{ fontSize: 16, opacity: 0.9, marginTop: 4 }}>模型按评分体系打分：结构、资料、语气</div>
+								<div style={{ fontSize: 16, opacity: 0.9, marginTop: 4 }}>模型按评分体系打分：internet plan 资料、有没有答到点上、语气</div>
 							</div>
 						</motion.div>
 					</motion.div>

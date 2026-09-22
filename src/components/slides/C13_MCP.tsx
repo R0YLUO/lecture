@@ -5,10 +5,10 @@ import { Slide, Inner, Title, assetPath, colors, fonts, border, shadow } from '.
  * MCP · 统一通信标准 —— 左图：每个 Agent 各接各的工具；右图：Agent → MCP Client → MCP Server → 工具
  *
  * 演讲者备注：
- * 前面我们的 Agent 用了三个工具，每个工具都是我们自己写的 function。工具一多、Agent 一多，问题就来了：
+ * 前面我们的 Agent 用了两个工具：查 internet plan、存客户，都是我们自己写的、接数据库的 function。工具一多、Agent 一多，问题就来了：
  * 左图里每个 Agent 各自去接每个工具，每一条连线都是一套自己的写法。MCP（Model Context Protocol）就是
  * AI 和工具之间的统一通信标准：右图里所有 Agent 都只学一种接法，通过 MCP Client 去接 MCP Server，
- * 每个工具只需要在 MCP Server 里接一次。
+ * 数据库这样的工具只需要在一个 Database MCP Server 里接一次，客服 Agent、销售的 Agent 都能用。
  */
 const PANELS = [
 	{

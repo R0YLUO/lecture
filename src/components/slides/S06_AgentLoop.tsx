@@ -17,8 +17,9 @@ import { CodeBlock } from '../CodeBlock';
  * 他不会知道的，就会像你是第一次跟模型交流似的。但是为什么，我们用 ChatGPT 时可以进行多轮对话呢？然后会记得以前说到的每一个细节？
  * 就是靠这个 messages。messages 就是你跟模型对话的记录，chat history。也是 agent 循环时给自己记的记录。
  * 就用这个记录才能使智能体知道自己下一步需要干什么。所以我们再看一下这段代码：在模型要求工具使用后我们执行代表工具的 function。
- * function 的结果写在记录上。比如，模型要求数据库的资料，function 抽出这个资料写到记录上，下一轮时，模型看到记录上写着财务资料，
- * 所以下一步它会要求任务版的工具使用，也就是另外一个 function。
+ * function 的结果写在记录上。比如，模型要求这个地址能装的 internet plan，function 从数据库抽出这个资料写到记录上，下一轮时，
+ * 模型看到记录上写着 internet plan 资料，就可以直接回答客户了。聊天机器人这种用例，客户每说一句话，代码就 append 到 messages，
+ * 再跑一次循环；客户确认了 internet plan、留了电话之后，模型才会要求第二个工具，把客户资料存进数据库。
  */
 const AGENT_LOOP = `
 while True:

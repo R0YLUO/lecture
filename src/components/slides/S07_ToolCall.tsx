@@ -3,29 +3,28 @@ import { Slide, Inner, Title, colors, fonts, border, shadowSm } from '../ui';
 import { CodeBlock } from '../CodeBlock';
 
 /**
- * 循环第一轮 · 模型要求工具使用（get_financial_data）
+ * 循环第一轮 · 模型要求工具使用（get_internet_plans）
  *
  * 演讲者备注（承接上一页）：
- * 模型意识到它需要做一件事，或者缺一些资料，所以会通过工具使用来达到它的目的。
- * 在模型要求工具使用后我们执行代表工具的 function。function 的结果写在记录上。
- * 比如，模型要求数据库的资料，function 抽出这个资料写到记录上，下一轮时，模型看到记录上写着财务资料，
- * 所以下一步它会要求任务版的工具使用，也就是另外一个 function。
+ * 客户在网站聊天框里问"我家能装什么 internet plan"，模型先反问地址；客户说了地址，这几句都在 messages 里。
+ * 这一轮，模型意识到它缺一样资料：这个地址能装的 internet plan。所以它不直接回答，而是要求工具使用：get_internet_plans，
+ * 把地址当参数传进去。我们的代码收到这个要求，就去执行代表工具的 function，从数据库里查，结果写在记录上。
  */
 const RESPONSE = `
 {
   "tool_call": {
-    "name": "get_financial_data",
+    "name": "get_internet_plans",
     "inputs": {
-      "date": "24-09-2026"
+      "address": "12 Example St, Clayton VIC 3168"
     }
   },
-  "text": "I need to use the get_financial_data tool to fetch today's financial data details"
+  "text": "I need to use the get_internet_plans tool to look up the plans available at the customer's address"
 }
 `;
 
 const STEPS = [
-	{ k: '模型', v: '意识到缺财务资料 → 要求 get_financial_data', color: colors.blue },
-	{ k: '代码', v: 'run_tool 执行 function，从数据库抽出资料', color: colors.green },
+	{ k: '模型', v: '客户说了地址 → 缺这个地址的 internet plan 资料 → 要求 get_internet_plans', color: colors.blue },
+	{ k: '代码', v: 'run_tool 执行 function，去数据库查这个地址能装的 internet plan', color: colors.green },
 	{ k: '记录', v: '结果 append 到 messages，下一轮模型就能看到', color: colors.orange },
 ];
 
