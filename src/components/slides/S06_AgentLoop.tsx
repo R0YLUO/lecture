@@ -22,7 +22,8 @@ import { CodeBlock } from '../CodeBlock';
  */
 const AGENT_LOOP = `
 while True:
-    response = llm(messages)
+    response = LLM(messages)
+    messages.append(response)
 
     if response.tool_call:
         result = run_tool(response.tool_call)
@@ -32,7 +33,6 @@ while True:
 `;
 
 const POINTS = [
-	{ code: 'while True', text: '进入循环：每一轮都把 messages 交给模型', color: colors.yellow },
 	{ code: 'response', text: '模型两个选择：要求工具使用，或者直接回答', color: colors.blue },
 	{ code: 'run_tool', text: '有工具要求就执行对应的 function，结果写回记录', color: colors.green },
 	{ code: 'messages', text: '模型没有记忆（stateless）：这份记录就是 chat history，也是 agent 给自己记的账', color: colors.orange },
