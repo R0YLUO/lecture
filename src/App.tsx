@@ -14,6 +14,7 @@ import S08 from './components/slides/S08_VerifyCall';
 import S08b from './components/slides/S08b_VerifyUI';
 import S08c from './components/slides/S08c_VerifyResult';
 import S09 from './components/slides/S09_FinalResponse';
+import S09b from './components/slides/S09b_ExecutionPatterns';
 import C10 from './components/slides/C10_Evals';
 import S11 from './components/slides/S11_DeterministicEvals';
 import S12 from './components/slides/S12_LLMJudge';
@@ -41,6 +42,7 @@ export default function App() {
 			<S08b />
 			<S08c />
 			<S09 />
+			<S09b />
 			{/* CH 4 · Evals */}
 			<C10 />
 			<S11 />
