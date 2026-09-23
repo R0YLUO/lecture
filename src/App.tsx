@@ -6,6 +6,7 @@ import S02 from './components/slides/S02_ManualWorkflow';
 import S03 from './components/slides/S03_AgentWorkflow';
 import S04 from './components/slides/S04_Concepts';
 import S05 from './components/slides/S05_AgenticFormula';
+import S05b from './components/slides/S05b_AgentLoopFlow';
 import S06 from './components/slides/S06_AgentLoop';
 import S07 from './components/slides/S07_ToolCall';
 import S07b from './components/slides/S07b_ToolResult';
@@ -32,6 +33,7 @@ export default function App() {
 			<S04 />
 			{/* CH 3 · 智能体是什么 · 代码执行 */}
 			<S05 />
+			<S05b />
 			<S06 />
 			<S07 />
 			<S07b />
