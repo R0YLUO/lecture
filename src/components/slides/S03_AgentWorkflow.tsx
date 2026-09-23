@@ -10,7 +10,7 @@ import { Slide, Inner, Title, Subtitle, assetPath, colors, fonts, border, shadow
  */
 const STEPS = ['查看财务', '查看任务版', '你来确定', '写 Email'];
 
-export default function S04_AgentWorkflow() {
+export default function S03_AgentWorkflow() {
 	return (
 		<Slide bg={colors.warmBg}>
 			<Inner style={{ flexDirection: 'column', justifyContent: 'center', gap: 24 }}>

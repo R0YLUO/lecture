@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Slide, Inner, Title, Subtitle, Grid, colors, fonts, border, shadow } from '../ui';
+import { Slide, Inner, Title, Grid, colors, fonts, border, shadow } from '../ui';
 
 /**
  * 一些基本概念 · LLM / API / Function / Tool Use
@@ -15,13 +15,13 @@ import { Slide, Inner, Title, Subtitle, Grid, colors, fonts, border, shadow } fr
  * Tool Use 就是 AI 系统的方法，用这些概念，使模型跟外面世界接触。就像我们的大脑使用我们的嘴和语言跟人相交流。
  */
 const CONCEPTS = [
-	{ icon: '🧠', name: 'LLM', def: '大语言模型', analogy: '像人的大脑：只能输入数据、输出数据，本体不能直接接触外面的世界', color: colors.purple },
-	{ icon: '↔️', name: 'API', def: '软件联系方法', analogy: '像两个人之间说的语言：两个软件系统之间联系的方式', color: colors.blue },
-	{ icon: '💪', name: 'Function', def: '软件用来执行一段代码', analogy: '像胳膊：输入一些资料、跑一段逻辑、输出一些结果', color: colors.orange },
-	{ icon: '🦾', name: 'Tool Use', def: 'LLM 通过 function 接触世界', analogy: '像大脑用嘴和语言跟人交流：模型借 function 接触外面的世界', color: colors.green },
+	{ icon: '🧠', name: 'LLM', def: '大语言模型', color: colors.purple },
+	{ icon: '💪', name: 'Function', def: '软件用来执行一段代码', color: colors.orange },
+	{ icon: '↔️', name: 'API', def: '软件联系方法', color: colors.blue },
+	{ icon: '🦾', name: 'Tool Use', def: 'LLM 通过 function 接触世界', color: colors.green },
 ];
 
-export default function S03_Concepts() {
+export default function S04_Concepts() {
 	return (
 		<Slide bg={colors.white}>
 			<Inner style={{ flexDirection: 'column', justifyContent: 'center' }}>
@@ -37,8 +37,7 @@ export default function S03_Concepts() {
 					}}>
 						02 · 基本概念
 					</div>
-					<Title size="56px" style={{ marginBottom: 8 }}>一些基本概念</Title>
-					<Subtitle>先把四个词说清楚，后面看代码就不慌。</Subtitle>
+					<Title size="56px">一些基本概念</Title>
 				</motion.div>
 
 				<Grid cols={4} gap={24}>
@@ -50,7 +49,7 @@ export default function S03_Concepts() {
 							transition={{ duration: 0.45, delay: 0.2 + i * 0.12 }}
 							style={{
 								background: colors.white, border, boxShadow: shadow,
-								display: 'flex', flexDirection: 'column', minHeight: 320,
+								display: 'flex', flexDirection: 'column', minHeight: 200,
 							}}>
 							<div style={{
 								background: c.color, borderBottom: border, padding: '20px 20px 16px',
@@ -59,9 +58,8 @@ export default function S03_Concepts() {
 								<span style={{ fontSize: 40, lineHeight: 1 }}>{c.icon}</span>
 								<span style={{ fontFamily: fonts.heading, fontSize: 30, fontWeight: 900, color: colors.black, letterSpacing: -0.5 }}>{c.name}</span>
 							</div>
-							<div style={{ padding: '20px 20px 24px', display: 'flex', flexDirection: 'column', gap: 14, flex: 1 }}>
+							<div style={{ padding: '20px 20px 24px' }}>
 								<p style={{ fontSize: 22, fontWeight: 700, lineHeight: 1.4 }}>{c.def}</p>
-								<p style={{ fontSize: 18, lineHeight: 1.6, color: colors.dark, opacity: 0.8, marginTop: 'auto', borderTop: `2px dashed ${colors.dark}`, paddingTop: 12 }}>{c.analogy}</p>
 							</div>
 						</motion.div>
 					))}

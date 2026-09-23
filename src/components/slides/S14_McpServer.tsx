@@ -13,7 +13,7 @@ import { Slide, Inner, Title, Subtitle, colors, fonts, border, shadow, shadowSm 
  * Agent 根本碰不到。下一页我们看 Client 和 Server 之间到底说些什么。
  */
 const AGENT_PARTS = [
-	{ label: 'LLM 调用', sub: 'llm(messages)', color: colors.purple, textColor: colors.white },
+	{ label: 'LLM 调用', sub: 'LLM(messages)', color: colors.purple, textColor: colors.white },
 	{ label: 'while True 循环', sub: 'agent loop', color: colors.yellow, textColor: colors.black },
 	{ label: 'MCP Client', sub: '只会一种接法', color: colors.green, textColor: colors.black },
 ];

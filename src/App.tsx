@@ -3,8 +3,8 @@ import SlideEngine from './components/SlideEngine';
 // 每页一个组件，按章节注释分块（前缀 S/C/Z + 两位序号 + PascalCase）
 import S01 from './components/slides/S01_Cover';
 import S02 from './components/slides/S02_ManualWorkflow';
-import S03 from './components/slides/S03_Concepts';
-import S04 from './components/slides/S04_AgentWorkflow';
+import S03 from './components/slides/S03_AgentWorkflow';
+import S04 from './components/slides/S04_Concepts';
 import S05 from './components/slides/S05_AgenticFormula';
 import S06 from './components/slides/S06_AgentLoop';
 import S07 from './components/slides/S07_ToolCall';
@@ -28,8 +28,9 @@ export default function App() {
 			{/* CH 1 · 用例：每天下班前的报告 */}
 			<S02 />
 			<S03 />
+			{/* CH 2 · 基本概念 */}
 			<S04 />
-			{/* CH 2 · 智能体是什么 · 代码执行 */}
+			{/* CH 3 · 智能体是什么 · 代码执行 */}
 			<S05 />
 			<S06 />
 			<S07 />
@@ -38,11 +39,11 @@ export default function App() {
 			<S08b />
 			<S08c />
 			<S09 />
-			{/* CH 3 · Evals */}
+			{/* CH 4 · Evals */}
 			<C10 />
 			<S11 />
 			<S12 />
-			{/* CH 4 · MCP */}
+			{/* CH 5 · MCP */}
 			<C13 />
 			<S14 />
 			<S15 />

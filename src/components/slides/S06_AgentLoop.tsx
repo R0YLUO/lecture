@@ -1,6 +1,8 @@
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Slide, Inner, Half, Title, colors, fonts, border, shadowSm } from '../ui';
 import { CodeBlock } from '../CodeBlock';
+import { MessagesModal, type TraceMessage } from '../MessagesModal';
 
 /**
  * Agent 循环 · while True 的那段代码
@@ -22,7 +24,8 @@ import { CodeBlock } from '../CodeBlock';
  */
 const AGENT_LOOP = `
 while True:
-    response = llm(messages)
+    response = LLM(messages)
+    messages.append(response)
 
     if response.tool_call:
         result = run_tool(response.tool_call)
@@ -32,13 +35,27 @@ while True:
 `;
 
 const POINTS = [
-	{ code: 'while True', text: '进入循环：每一轮都把 messages 交给模型', color: colors.yellow },
+	{ code: 'messages', text: '智能体的 context：指令 + 记忆', color: colors.orange, opensTrace: true },
 	{ code: 'response', text: '模型两个选择：要求工具使用，或者直接回答', color: colors.blue },
 	{ code: 'run_tool', text: '有工具要求就执行对应的 function，结果写回记录', color: colors.green },
-	{ code: 'messages', text: '模型没有记忆（stateless）：这份记录就是 chat history，也是 agent 给自己记的账', color: colors.orange },
+];
+
+// 点开 messages 后逐条追加的记录：system 一条是指令，之后每一条都是循环攒下的记忆（数字沿用前面几页的示例数据）
+const MESSAGES: TraceMessage[] = [
+	{ role: 'system', note: 'instructions', content: 'You write the boss\'s daily report: check finance → check tasks → email the boss. Never send without verify.\nTools: get_financial_data · get_tasks · verify · send_email\nToday: write and send the report for 24-09-2026.' },
+	{ role: 'llm', note: 'asks for a tool', content: 'tool_call: get_financial_data({ date: "24-09-2026" })' },
+	{ role: 'tool', note: 'run_tool', content: 'get_financial_data →\n{ revenue: 12400, expenses: 8150, net_profit: 4250, invoices_paid: 3, invoices_overdue: 1 }' },
+	{ role: 'llm', note: 'asks for a tool', content: 'tool_call: get_tasks({ date: "24-09-2026" })' },
+	{ role: 'tool', note: 'run_tool', content: 'get_tasks → { done: 3, in_review: 2 }' },
+	{ role: 'llm', note: 'asks for a tool', content: 'tool_call: verify({ email: "Dear boss, here are today\'s details..." })' },
+	{ role: 'tool', note: 'human approved', content: 'verify → { decision: "send" }' },
+	{ role: 'llm', note: 'asks for a tool', content: 'tool_call: send_email({ to: "boss", email: "Dear boss, here are today\'s details..." })' },
+	{ role: 'tool', note: 'run_tool', content: 'send_email → { status: "sent" }' },
+	{ role: 'llm', note: 'final answer', content: 'tool_call: null\ntext: "I have successfully sent today\'s email."  →  loop ends' },
 ];
 
 export default function S06_AgentLoop() {
+	const [traceOpen, setTraceOpen] = useState(false);
 	return (
 		<Slide bg={colors.warmBg}>
 			<Inner split style={{ gap: 40 }}>
@@ -63,17 +80,48 @@ export default function S06_AgentLoop() {
 							key={p.code}
 							initial={{ opacity: 0, x: 30 }}
 							animate={{ opacity: 1, x: 0 }}
-							transition={{ duration: 0.4, delay: 0.3 + i * 0.14 }}
-							style={{ display: 'flex', alignItems: 'stretch', background: colors.white, border, boxShadow: shadowSm }}>
-							<span style={{
-								display: 'flex', alignItems: 'center', padding: '0 14px', background: p.color, borderRight: border,
-								fontFamily: fonts.mono, fontSize: 14, fontWeight: 700, whiteSpace: 'nowrap',
-							}}>{p.code}</span>
-							<span style={{ padding: '12px 16px', fontSize: 17, lineHeight: 1.5, fontWeight: 500 }}>{p.text}</span>
+							transition={{ duration: 0.4, delay: 0.3 + i * 0.14 }}>
+							<PointRow code={p.code} text={p.text} color={p.color} onClick={p.opensTrace ? () => setTraceOpen(true) : undefined} />
 						</motion.div>
 					))}
 				</Half>
 			</Inner>
+			<AnimatePresence>
+				{traceOpen && <MessagesModal messages={MESSAGES} onClose={() => setTraceOpen(false)} />}
+			</AnimatePresence>
 		</Slide>
+	);
+}
+
+// 说明条：带 onClick 时是按钮，悬停沉下去（同翻页箭头），右侧提示可点开
+function PointRow({ code, text, color, onClick }: { code: string; text: string; color: string; onClick?: () => void }) {
+	const [hover, setHover] = useState(false);
+	const pressed = hover && !!onClick;
+	return (
+		<div
+			role={onClick ? 'button' : undefined}
+			onClick={onClick}
+			onMouseEnter={() => setHover(true)}
+			onMouseLeave={() => setHover(false)}
+			style={{
+				display: 'flex', alignItems: 'stretch', background: colors.white, border,
+				boxShadow: pressed ? 'none' : shadowSm,
+				transform: pressed ? 'translate(3px,3px)' : 'none',
+				cursor: onClick ? 'pointer' : 'default',
+				transition: 'all 0.15s',
+			}}>
+			<span style={{
+				display: 'flex', alignItems: 'center', padding: '0 14px', background: color, borderRight: border,
+				fontFamily: fonts.mono, fontSize: 14, fontWeight: 700, whiteSpace: 'nowrap',
+			}}>{code}</span>
+			<span style={{ padding: '12px 16px', fontSize: 17, lineHeight: 1.5, fontWeight: 500, flex: 1 }}>{text}</span>
+			{onClick && (
+				<span style={{
+					display: 'flex', alignItems: 'center', padding: '0 14px', borderLeft: border,
+					fontFamily: fonts.mono, fontSize: 12, fontWeight: 700, letterSpacing: 1, whiteSpace: 'nowrap',
+					background: hover ? colors.yellow : colors.warmBg, transition: 'background 0.15s',
+				}}>点开看 →</span>
+			)}
+		</div>
 	);
 }
