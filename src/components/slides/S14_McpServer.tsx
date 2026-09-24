@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
-import { Slide, Inner, Title, Subtitle, colors, fonts, border, shadow, shadowSm } from '../ui';
+import { Slide, Inner, Title, colors, fonts, border, shadow, shadowSm } from '../ui';
 
 /**
  * MCP · 工具住在自己的服务器里
@@ -24,12 +24,6 @@ const TOOLS = [
 	{ name: 'send_email', sub: '→ 邮箱 API' },
 ];
 
-const BENEFITS = [
-	{ k: '独立部署', v: '工具单独更新、单独重启，不用碰 Agent 的代码', color: colors.blue },
-	{ k: '一起共用', v: '多个 Agent 接同一个 MCP Server，工具只写一次', color: colors.green },
-	{ k: '权限隔离', v: '数据库密钥、API 权限留在 Server，Agent 碰不到', color: colors.orange },
-];
-
 function Box({ title, tag, color, children }: { title: string; tag: string; color: string; children: ReactNode }) {
 	return (
 		<div style={{ flex: 1, background: colors.white, border, boxShadow: shadow, display: 'flex', flexDirection: 'column' }}>
@@ -50,14 +44,13 @@ export default function S14_McpServer() {
 		<Slide bg={colors.white}>
 			<Inner style={{ flexDirection: 'column', justifyContent: 'center', gap: 20 }}>
 				<motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
-					<div style={{ display: 'flex', alignItems: 'center', gap: 20, marginBottom: 6 }}>
+					<div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
 						<span style={{
 							padding: '6px 14px', background: colors.black, color: colors.yellow,
 							fontFamily: fonts.mono, fontSize: 14, fontWeight: 700, letterSpacing: 2,
 						}}>05 · MCP</span>
 						<Title size="44px">工具住在自己的服务器里，<span style={{ background: colors.red, color: colors.white, padding: '0 14px' }}>不在 Agent 里</span></Title>
 					</div>
-					<Subtitle>MCP Server 是一个独立的进程，可以在本机，也可以在另一台机器上。Agent 这边只剩一个 MCP Client。</Subtitle>
 				</motion.div>
 
 				<div style={{ display: 'flex', alignItems: 'stretch', gap: 0 }}>
@@ -117,23 +110,6 @@ export default function S14_McpServer() {
 							))}
 						</Box>
 					</motion.div>
-				</div>
-
-				<div style={{ display: 'flex', gap: 20 }}>
-					{BENEFITS.map((b, i) => (
-						<motion.div
-							key={b.k}
-							initial={{ opacity: 0, y: 20 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.4, delay: 0.95 + i * 0.12 }}
-							style={{ flex: 1, display: 'flex', alignItems: 'stretch', background: colors.white, border, boxShadow: shadowSm }}>
-							<span style={{
-								display: 'flex', alignItems: 'center', padding: '0 16px', background: b.color, borderRight: border,
-								fontFamily: fonts.mono, fontSize: 15, fontWeight: 700, whiteSpace: 'nowrap',
-							}}>{b.k}</span>
-							<span style={{ padding: '12px 16px', fontSize: 17, lineHeight: 1.5, fontWeight: 600 }}>{b.v}</span>
-						</motion.div>
-					))}
 				</div>
 			</Inner>
 		</Slide>

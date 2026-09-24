@@ -120,17 +120,6 @@ export default function S15_McpApis() {
 						</motion.div>
 					))}
 				</div>
-
-				<motion.div
-					initial={{ opacity: 0, y: 16 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.45, delay: 1.3 }}
-					style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '10px 18px', background: colors.white, border, boxShadow: shadowSm }}>
-					<span style={{ fontFamily: fonts.mono, fontSize: 13, fontWeight: 700, letterSpacing: 2, background: colors.black, color: colors.yellow, padding: '4px 10px' }}>回头看</span>
-					<span style={{ fontSize: 17, fontWeight: 600 }}>
-						while True 里的 <span style={{ fontFamily: fonts.mono, fontWeight: 700 }}>run_tool</span> 就是执行阶段的 call tool；发现阶段拿到的工具清单，就是循环开始前放进 messages 的工具资料。
-					</span>
-				</motion.div>
 			</Inner>
 		</Slide>
 	);
