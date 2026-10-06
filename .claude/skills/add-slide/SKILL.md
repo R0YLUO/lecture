@@ -22,6 +22,7 @@ argument-hint: "[这一页讲什么，或要改哪页]"
 2. **写内容**：根组件 `export default function Xnn_Name()`，用 `Slide` 包整页 + `Inner`（`center` 居中 / `split` 左右分栏）布局；元素用 `ui.tsx` 基元：`Title` `Subtitle` `Highlight` `Tag` `Half` `CountUp`（数字滚动）`GrowBar`（条形图）。
 3. **加动画**：`motion.*` + 递增 `delay`（0.15→0.3→…）让元素依次入场，或用 `springIn` / `slideFromLeft|Right` variants。
 4. **注册**：在 `src/App.tsx` `import` 它，按放映顺序放进 `<SlideEngine>`（用注释分章节）。
+   **中英同步**：在 `src/components/slides/en/` 建同名英文版（import 路径为 `../../ui`），注册进 `src/en/App.tsx` 同一位置。改已有页时也要两个版本一起改。
 5. **验证**：`npm run build`（= `tsc -b && vite build`）确认类型通过；`npm run dev` 里 `← →` 翻到这页走查。
 
 ## 改封面 / 换 logo / 调样式
