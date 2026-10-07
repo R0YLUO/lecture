@@ -60,7 +60,7 @@ const ROLE: Record<Role, { label: string; color: string }> = {
 function chipsUpTo(step: number): Chip[] {
 	const chips: Chip[] = [];
 	for (const b of SCRIPT.slice(0, step + 1)) {
-		if (b.kind === 'enterLoop') chips.push({ role: 'system', text: "Write today's report · 2 tools" });
+		if (b.kind === 'enterLoop') chips.push({ role: 'system', text: 'Daily report · 2 tools' });
 		else if (b.kind === 'llmToolCall') chips.push({ role: 'llm', text: `Call ${b.tool.icon} ${b.tool.name}` });
 		else if (b.kind === 'runTool') chips.push({ role: 'tool', text: `${b.tool.icon} ${b.tool.result}` });
 		else if (b.kind === 'llmDone') chips.push({ role: 'llm', text: 'Report written ✓' });
@@ -71,7 +71,7 @@ function chipsUpTo(step: number): Chip[] {
 // Absolute coordinates on the 1600×900 canvas
 interface Box { x: number; y: number; w: number; h: number }
 const L: Record<'instruction' | 'frame' | 'context' | 'llm' | 'tool' | 'result', Box> = {
-	instruction: { x: 100, y: 235, w: 290, h: 245 },
+	instruction: { x: 100, y: 212, w: 290, h: 290 },
 	frame: { x: 460, y: 175, w: 770, h: 605 },
 	context: { x: 500, y: 225, w: 290, h: 515 },
 	llm: { x: 940, y: 290, w: 260, h: 160 },
@@ -211,7 +211,7 @@ export default function S05b_AgentLoopFlow() {
 				))}
 
 				{/* Instruction · system prompt */}
-				<Node box={L.instruction} shown active={active.instruction} color={colors.purple} header="Instruction · system prompt">
+				<Node box={L.instruction} shown active={active.instruction} color={colors.purple} header="System prompt">
 					<div style={{ padding: '18px 18px 16px', display: 'flex', flexDirection: 'column', gap: 14, flex: 1 }}>
 						<div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
 							<span style={{ fontSize: 28, lineHeight: 1 }}>🎯</span>

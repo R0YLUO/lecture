@@ -23,7 +23,7 @@ export default function S03_AgentWorkflow() {
 						}}>
 							01 · LET AN AI AGENT DO IT
 						</div>
-						<Title size="48px" style={{ marginBottom: 8 }}>AI drafts it via APIs — you just approve</Title>
+						<Title size="48px" style={{ marginBottom: 8 }}>Agent drafts email — you press send</Title>
 						<Subtitle style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
 							{STEPS.map((s, i) => (
 								<span key={s} style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
@@ -49,8 +49,8 @@ export default function S03_AgentWorkflow() {
 				</div>
 
 				<motion.img
-					src={assetPath('slides/04-agent-workflow.png')}
-					alt="AI agent workflow: the AI checks database financials and the Kanban task board via APIs, drafts the email for your approval, then sends it to the boss — 15 seconds every day"
+					src={assetPath('slides/en/04-agent-workflow.png')}
+					alt="AI agent workflow: the AI checks financials in the database and daily tasks on the Kanban board, confirms with you, then sends the email to the boss — 15 seconds every day"
 					initial={{ opacity: 0, y: 30 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.55, delay: 0.25 }}

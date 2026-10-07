@@ -5,7 +5,7 @@ import { Slide, Inner, Title, colors, fonts, border, shadow } from '../ui';
  * 封面 · 如何构建可靠的 AI 系统？
  *
  * 演讲者备注：
- * 大家好，我讲课之前先做个自我介绍。我名字是 Roy，我是一个 AI 工程师，目前是在一个 AI 专业公司叫 V2。
+ * 大家好，我讲课之前先做个自我介绍。我名字是 Roy，我是一个 Forward Deployed Engineer（前线部署工程师），目前是在一个 AI 专业公司叫 V2。
  * 我是在这里的 Monash 读的软件工程本科。毕业后在 Deloitte 干了几年。刚开始时，项目都是软件工程有关的。
  * 最近几年更多的 AI 项目出现了，使我转向了 AI 工程。在新公司，项目都是 AI 有关的，帮助顾客们设计 AI 系统，
  * 帮助提高他们业务流程的效率。我们今天的话题是，如何构建可靠的 AI 系统。我们会从最基本、地道的角度来学这个问题，
@@ -65,7 +65,7 @@ export default function S01_Cover() {
 							background: colors.white, border, boxShadow: shadow,
 						}}>
 						<span style={{ fontFamily: fonts.mono, fontSize: 14, color: colors.dark, letterSpacing: 2 }}>SPEAKER</span>
-						<span style={{ fontSize: 20, fontWeight: 700 }}>Roy Luo · AI Engineer @ V2</span>
+						<span style={{ fontSize: 20, fontWeight: 700 }}>Roy Luo · Forward Deployed Engineer @ V2</span>
 					</motion.div>
 				</div>
 			</Inner>

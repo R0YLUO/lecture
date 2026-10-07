@@ -15,10 +15,10 @@ import { Slide, Inner, Title, Grid, colors, fonts, border, shadow } from '../../
  * Tool use is how an AI system combines these concepts to let the model interact with the outside world — just like our brain uses our mouth and language to communicate with people.
  */
 const CONCEPTS = [
-	{ icon: '🧠', name: 'LLM', def: 'Large language model', color: colors.purple },
-	{ icon: '💪', name: 'Function', def: 'A piece of code that software runs', color: colors.orange },
+	{ icon: '🧠', name: 'LLM', def: 'Stateless text predictions', color: colors.purple },
+	{ icon: '💪', name: 'Function', def: 'Code that a program can run', color: colors.orange },
 	{ icon: '↔️', name: 'API', def: 'How software systems talk to each other', color: colors.blue },
-	{ icon: '🦾', name: 'Tool Use', def: 'An LLM reaching the world through functions', color: colors.green },
+	{ icon: '🦾', name: 'Tool Use', def: 'Method to enable LLMs to interact with the outside world', color: colors.green },
 ];
 
 export default function S04_Concepts() {

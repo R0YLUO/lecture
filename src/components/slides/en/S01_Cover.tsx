@@ -5,7 +5,7 @@ import { Slide, Inner, Title, colors, fonts, border, shadow } from '../../ui';
  * Cover · How to Build Reliable AI Systems?
  *
  * Speaker notes:
- * Hi everyone, let me introduce myself before we start. My name is Roy, and I'm an AI engineer at an AI consultancy called V2.
+ * Hi everyone, let me introduce myself before we start. My name is Roy, and I'm a forward deployed engineer at an AI consultancy called V2.
  * I studied software engineering here at Monash, then spent a few years at Deloitte. At first my projects were all software engineering.
  * Over the last few years more and more AI projects came up, and that pulled me into AI engineering. At my new company every project
  * is AI — we help clients design AI systems that make their business processes more efficient. Today's topic is how to build reliable
@@ -65,7 +65,7 @@ export default function S01_Cover() {
 							background: colors.white, border, boxShadow: shadow,
 						}}>
 						<span style={{ fontFamily: fonts.mono, fontSize: 14, color: colors.dark, letterSpacing: 2 }}>SPEAKER</span>
-						<span style={{ fontSize: 20, fontWeight: 700 }}>Roy Luo · AI Engineer @ V2</span>
+						<span style={{ fontSize: 20, fontWeight: 700 }}>Roy Luo · Forward Deployed Engineer @ V2</span>
 					</motion.div>
 				</div>
 			</Inner>

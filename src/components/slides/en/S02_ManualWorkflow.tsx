@@ -27,7 +27,7 @@ export default function S02_ManualWorkflow() {
 						}}>
 							01 · A COMMON USE CASE
 						</div>
-						<Title size="48px" style={{ marginBottom: 8 }}>Write your boss a daily report — every day</Title>
+						<Title size="48px" style={{ marginBottom: 8 }}>Writing a daily report to your boss</Title>
 						<Subtitle style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
 							{STEPS.map((s, i) => (
 								<span key={s} style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
@@ -53,7 +53,7 @@ export default function S02_ManualWorkflow() {
 				</div>
 
 				<motion.img
-					src={assetPath('slides/02-manual-workflow.png')}
+					src={assetPath('slides/en/02-manual-workflow.png')}
 					alt="Manual workflow: check financials in the database → check the Kanban task board → write an email to the boss, 15 minutes every day"
 					initial={{ opacity: 0, y: 30 }}
 					animate={{ opacity: 1, y: 0 }}

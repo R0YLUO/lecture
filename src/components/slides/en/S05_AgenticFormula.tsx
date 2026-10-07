@@ -10,9 +10,9 @@ import { Slide, Inner, Title, colors, fonts, border, shadow } from '../../ui';
  * so if you've never programmed, don't worry; getting the rough idea is enough. If you have any questions, just raise your hand.
  */
 const PARTS = [
-	{ label: 'LLM', sub: 'Large language model · the brain', color: colors.purple, textColor: colors.white },
-	{ label: 'Tool Use', sub: 'Reaching the outside world', color: colors.blue, textColor: colors.black },
-	{ label: 'Agent Loop', sub: 'Decides its own next step', color: colors.yellow, textColor: colors.black },
+	{ label: 'LLM', color: colors.purple, textColor: colors.white },
+	{ label: 'Tool Use', color: colors.blue, textColor: colors.black },
+	{ label: 'Agent Loop', color: colors.yellow, textColor: colors.black },
 ];
 
 export default function S05_AgenticFormula() {
@@ -62,7 +62,6 @@ export default function S05_AgenticFormula() {
 									display: 'flex', flexDirection: 'column', gap: 10, alignItems: 'center',
 								}}>
 								<span style={{ fontFamily: fonts.heading, fontSize: 48, fontWeight: 900, color: p.textColor, letterSpacing: -1, lineHeight: 1.1 }}>{p.label}</span>
-								<span style={{ fontFamily: fonts.mono, fontSize: 14, fontWeight: 700, color: p.textColor, letterSpacing: 1, opacity: 0.85 }}>{p.sub}</span>
 							</motion.div>
 						</div>
 					))}
