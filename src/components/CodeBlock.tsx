@@ -2,9 +2,9 @@ import type { CSSProperties } from 'react';
 import { motion } from 'framer-motion';
 import { colors, fonts, border, shadow } from './ui';
 
-// 代码片段基元 —— 深底 + 粗黑边 + 硬阴影，自带 Python / JSON 的轻量高亮，逐行错峰入场。
+// 代码片段基元 —— 深底 + 粗黑边 + 硬阴影，自带 Python / JSON / TypeScript 的轻量高亮，逐行错峰入场。
 
-type Lang = 'python' | 'json';
+type Lang = 'python' | 'json' | 'ts';
 type TokenType = 'comment' | 'string' | 'key' | 'keyword' | 'literal' | 'func' | 'ident' | 'punct' | 'space';
 interface Token { text: string; type: TokenType }
 
@@ -16,6 +16,10 @@ const LANGS: Record<Lang, { re: RegExp; types: TokenType[] }> = {
 	json: {
 		re: /("(?:[^"\\]|\\.)*"(?=\s*:))|("(?:[^"\\]|\\.)*")|(\b(?:null|true|false)\b)|(-?\b\d+(?:\.\d+)?\b)|(\s+)|([^\s"]+)/g,
 		types: ['key', 'string', 'literal', 'literal', 'space', 'punct'],
+	},
+	ts: {
+		re: /(\/\/.*$)|("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')|(\b(?:type|interface|const|let|function|return|export|import|from|async|await|if|else)\b)|(\b(?:string|number|boolean|void|null|true|false)\b|\b\d+(?:\.\d+)?\b)|([A-Za-z_]\w*(?=[(<]))|([A-Za-z_]\w*)|(\s+)|([^\sA-Za-z_]+?)/g,
+		types: ['comment', 'string', 'keyword', 'literal', 'func', 'ident', 'space', 'punct'],
 	},
 };
 
